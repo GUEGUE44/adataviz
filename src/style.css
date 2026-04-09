@@ -374,3 +374,52 @@ h1 {
 .cacher {
   display: none;
 }
+
+/*pour l'écran d'acceuil*/
+#welcome {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  height: 50vh;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  color: yellow;
+}
+
+#mainContent {
+  display: none;
+}
+
+.welcome-card {
+  padding: 40px;
+  background: #3ab10c;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 30px;
+  text-align: center;
+}
+
+/*taille barre de recherche*/
+.search input#searchInput {
+  width: 400px; /* Largeur de la barre de recherche */
+  padding: 10px 15px; /* Espacement à l'intérieur */
+  font-size: 20px; /* Taille du texte */
+  border-radius: 8px; /* Coins arrondis */ /* Bordure */
+  box-sizing: border-box; /* Pour que padding ne dépasse pas */
+  border: green;
+  background-color: white;
+  color: #08060d;
+}
+
+/*taille bouton de recherche*/
+.search button {
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: #08060d;
+  background-color: #2684c3;
+}
