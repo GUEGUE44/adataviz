@@ -54,6 +54,14 @@ h2 {
   color: white(239, 72, 72);
 }
 
+.card.arbres-card p {
+  color: white;
+}
+
+.card.arbres-card h2 {
+  color: #3ab10c;
+}
+
 .search {
   display: flex;
   justify-content: center;

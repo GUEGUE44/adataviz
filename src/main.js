@@ -43,7 +43,7 @@ parisCard.addEventListener("click", () => {
 
 const createCard = (result) => {
   const div = document.createElement("div");
-  div.classList.add("card");
+  div.classList.add("card", "arbres-card");
 
   div.innerHTML = `
   <div class="card-header">
