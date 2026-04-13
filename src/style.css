@@ -232,3 +232,62 @@ h2 {
   background: rgba(0, 0, 0, 0.35);
   z-index: 0;
 }
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap; /* IMPORTANT */
+}
+
+#homeBtn {
+  flex-shrink: 0; /* empêche de bouger */
+}
+
+#categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.category {
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.category-block {
+  margin-bottom: 40px;
+}
+
+.category-list {
+  column-width: 240px;
+  column-gap: 20px;
+}
+
+.blue {
+  color: #0055a4; /* bleu France */
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  color: #ef4135; /* rouge France */
+}
+
+.title {
+  text-align: center;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.view {
+  display: none;
+}
