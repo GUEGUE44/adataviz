@@ -3,6 +3,7 @@ import "./style.css";
 
 //Tableau qui va stocker les données des activités à Paris
 let parisData = [];
+let arbresData = [];
 //On récupère la carte "Les arbres a Paris" dans le HTML
 const arbresCard = document.querySelector("#arbresCard");
 //On récupère la carte "Que faire à Paris"
@@ -19,7 +20,10 @@ const searchInput = document.querySelector("#searchInput");
 const homeBtn = document.querySelector("#homeBtn");
 //contenue principal
 const mainContent = document.querySelector("#mainContent");
+const loadMoreBtn = document.querySelector("#loadMoreBtn");
 
+let itemsPerPage = 50;
+let currentIndex = 0;
 //sa sert a a savoir si ont est dans les arbres a Paris ou que faire a Paris.
 let currentApi = "";
 
@@ -51,10 +55,9 @@ const load150Paris = async () => {
   list.innerHTML = "";
 
   // on affiche 150 max
-  parisData.slice(0, 150).forEach((item) => {
-    //ont crée une carte pour chaaque activité
-    createParisCard(item);
-  });
+  currentIndex = 0;
+  displayParisData();
+  loadMoreBtn.style.display = "block";
 };
 
 //API arbres (les arbres a Paris)
@@ -105,6 +108,8 @@ const openMain = (api, placeholder, type) => {
     categories.style.display = "none";
     requestApi(api);
   }
+  currentIndex = 0;
+  loadMoreBtn.style.display = "none";
 };
 
 //click sur la carte les arbres a Paris
@@ -159,10 +164,13 @@ const createParisCard = (result, container) => {
     <p><strong>URL :</strong> ${result.contact_url_text ?? "inconnu"}</p>
     
     <p><strong>Coordonnées :</strong>
+    
     ${
-      //vérifie les coordonnées
+      //${...} sa permet d'injecter du javascript dans du html
+      //vérifie si les coordonnées existent (dans le cas présent on vérifie dans l'API)
       result.lat_lon
-        ? //liens google maps
+        ? //le point d'interrogation est égal a un if/else mais ne peux etre utiliser que quant le if/else est petit
+          //créer un liens google maps, target = "_blank" sert a ouvrir le liens dans un nouvelle onglet et //${result.lat_lon.lat},${result.lat_lon.lon} sert a affiché les coordonnées.
           `<a href="https://www.google.com/maps?q=${result.lat_lon.lat},${result.lat_lon.lon}" target="_blank">
         ${result.lat_lon.lat}, ${result.lat_lon.lon}
         </a>`
@@ -173,7 +181,12 @@ const createParisCard = (result, container) => {
     ${
       //affiche une image si il y en a une de disponible
       result.cover_url
-        ? `<img src="${result.cover_url}" 
+        ? //src l'image venant de l'API
+          //alt texte alternative si l'iamge ne charge pas
+          //style image responsive et petit espace au dessus
+          //"" on affiche rien dutout
+          `<img src="${result.cover_url}" 
+        
             alt="${result.title}" 
             style="max-width:100%; margin-top:5px;">`
         : ""
@@ -200,28 +213,44 @@ const toggleCard = (card) => {
       : "▲ voir moins";
   });
 };
+const displayParisData = () => {
+  const nextItems = parisData.slice(currentIndex, currentIndex + itemsPerPage);
+
+  nextItems.forEach((item) => {
+    createParisCard(item);
+  });
+
+  currentIndex += itemsPerPage;
+
+  // cache bouton si plus rien à afficher
+  if (currentIndex >= parisData.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "block";
+  }
+};
+const displayArbresData = () => {
+  const nextItems = arbresData.slice(currentIndex, currentIndex + itemsPerPage);
+
+  nextItems.forEach((item) => {
+    createCard(item);
+  });
+
+  currentIndex += itemsPerPage;
+
+  if (currentIndex >= arbresData.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "block";
+  }
+};
 
 //fonction qui appel l'API
 const requestApi = async (url, isSearch = false) => {
   try {
-    //fetch API
     const response = await fetch(url);
     const data = await response.json();
-    //récupération du résultat
     const results = data.results;
-
-    //si activités / sinon arbres
-    if (currentApi === "paris") {
-      parisData = results;
-
-      list.innerHTML = "";
-
-      results.forEach((item) => {
-        createParisCard(item);
-      });
-
-      return;
-    }
 
     if (isSearch && results.length === 0) {
       alert("Aucun résultat trouvé");
@@ -229,10 +258,15 @@ const requestApi = async (url, isSearch = false) => {
     }
 
     list.innerHTML = "";
+    currentIndex = 0;
 
-    results.forEach((result) => {
-      url.includes("les-arbres") ? createCard(result) : createParisCard(result);
-    });
+    if (currentApi === "paris") {
+      parisData = results;
+      displayParisData();
+    } else if (currentApi === "arbres") {
+      arbresData = results;
+      displayArbresData();
+    }
   } catch (error) {
     console.error(error);
   }
@@ -270,7 +304,13 @@ homeBtn.addEventListener("click", () => {
   homeBtn.style.display = "none";
   searchInput.value = "";
 });
-
+loadMoreBtn.addEventListener("click", () => {
+  if (currentApi === "paris") {
+    displayParisData();
+  } else {
+    displayArbresData();
+  }
+});
 document.querySelectorAll(".welcome-card").forEach((card) => {
   const video = card.querySelector("video");
 
@@ -312,9 +352,16 @@ categories.forEach((cat) => {
       return text.includes(type);
     });
 
-    filtered.forEach((item) => {
-      //affiche le résultat
-      createParisCard(item);
-    });
+    parisData = filtered;
+    currentIndex = 0;
+    list.innerHTML = "";
+
+    displayParisData();
+
+    if (currentApi === "paris") {
+      displayParisData();
+    } else {
+      displayArbresData();
+    }
   });
 });
