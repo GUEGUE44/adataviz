@@ -1,116 +1,189 @@
+/*Ça définit le style global du site :
+
+police par défaut = Arial
+fond = gris très foncé / noir
+couleur du texte = gris clair*/
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
   font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: #16171d;
+  color: #9ca3af;
 }
-
-@media (prefers-color-scheme: dark) {
+/* pour que le fond devienne blanc lorsque l'on est en mode clair sur son navigateur*/
+@media (prefers-color-scheme: light) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
+    background: #fff;
+    color: #6b6375;
   }
 }
 
+/*ajoute de l'espace autour de toute la page*/
 body {
   margin: 20px;
 }
 
-h1 {
+/*couleur du bouton retour*/
+#returnBtn {
+  background: white;
+  color: black;
+}
+/*couleur du bouton acceuil*/
+#accueilBtn {
+  background: red;
+}
+/*centre le titre et le grossis*/
+.title {
   text-align: center;
   font-size: 80px;
   font-weight: bold;
-  margin-top: 20px;
-  color: white;
-  margin-bottom: 20px;
 }
-
-h2 {
-  color: #fafcfd;
+/*mes des couleurs dans le titre Paris*/
+.blue {
+  color: #0055a4;
 }
-
-.card.paris-card {
-  color: #111;
-}
-
-.card.paris-card p {
+.white {
   color: white;
 }
-
-.card.paris-card h2 {
-  color: white(239, 72, 72);
+.red {
+  color: #ef4135;
 }
 
-.card.arbres-card p {
-  color: white;
+/*zone des 2 grande cartes de l'acceuil (affichage en ligne (flex)*/
+#welcome {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  height: 50vh;
 }
 
-.card.arbres-card h2 {
-  color: #3ab10c;
+/*carte de l'acceuil cliquables, vidéos, arrondies, effet hover et effet responsive du placement des cartes*/
+.welcome-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 500px;
+  height: 400px;
+  flex: 1;
+  max-width: 500px;
+  min-width: 300px;
 }
 
+.welcome-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ajoute un voile sombre sur les cartes d'accueil */
+.welcome-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 0;
+}
+
+.card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/*carte que faire a Paris*/
+.card-content {
+  position: relative;
+  z-index: 1;
+  color: rgb(114, 200, 253);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 105px;
+}
+/*carte les arbres a Paris*/
+.card-content1 {
+  position: relative;
+  z-index: 1;
+  color: yellowgreen;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 95px;
+}
+
+/* organise */
 .search {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 25px;
+  flex-wrap: nowrap;
 }
-
-.search input#searchInput {
+/*champ de recharche stylisé*/
+.search input {
   width: 400px;
   padding: 10px 15px;
   font-size: 20px;
   border-radius: 8px;
-  background-color: white;
+  background: white;
   color: #08060d;
   margin-top: 30px;
 }
-
+/*bouton de recharche bleu*/
 .search button {
   padding: 10px 20px;
   font-size: 20px;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #2684c3;
+  background: #2684c3;
+  color: white;
   margin-top: 30px;
+  flex-shrink: 0;
 }
 
+/* organise les filtres (concert, musée...) */
+#categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+/*chaque bouton catégorie*/
+.category {
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* crée un affichage en colonnes */
 .list {
   column-width: 240px;
   column-gap: 20px;
   padding: 15px;
 }
 
-.card {
-  display: inline-block;
-  width: 100%;
-  box-sizing: border-box;
-
-  margin: 0 0 20px 0;
-
-  break-inside: avoid;
-
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+.card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+.card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: white;
 }
 
-.card p {
-  font-size: 0.9rem;
+.arbres-card h2 {
+  color: #3ab10c;
+}
+.paris-card h2 {
   color: white;
 }
 
@@ -126,183 +199,12 @@ h2 {
   color: #2684c3;
   cursor: pointer;
 }
-
+/*cache les infos "voir plus"*/
 .cacher {
   display: none;
 }
 
-#welcome {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  height: 50vh;
-  cursor: pointer;
-  font-size: 2em;
-  font-weight: bold;
-  color: yellow;
-}
-
-#mainContent {
-  display: none;
-}
-
-.welcome-card {
-  padding: 40px;
-  background: #3ab10c;
-  border-radius: 15px;
-  font-size: 30px;
-  text-align: center;
-}
-
-#parisCard {
-  color: white;
-  background-color: #2684c3;
-  opacity: 1;
-}
-
-#arbresCard,
-#parisCard {
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-#arbresCard:hover,
-#parisCard:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-@media (max-width: 600px) {
-  body {
-    margin: 10px;
-    font-size: 14px;
-  }
-
-  .search input#searchInput {
-    width: 100%;
-  }
-}
-
-.card h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 10px 0;
-}
-
-.card p {
-  font-size: 14px;
-  margin: 4px 0;
-}
-
-.welcome-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-/* vidéo en fond */
-.card-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* texte au-dessus */
-.card-content {
-  position: relative;
-  z-index: 1;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  padding: 40px;
-}
-
-/* petit overlay sombre pour lire le texte */
-.welcome-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 0;
-}
-
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: nowrap; /* IMPORTANT */
-}
-
-#homeBtn {
-  flex-shrink: 0; /* empêche de bouger */
-}
-
-#categories {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
-}
-
-.category {
-  background: black;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.category-block {
-  margin-bottom: 40px;
-}
-
-.category-list {
-  column-width: 240px;
-  column-gap: 20px;
-}
-
-.blue {
-  color: #0055a4; /* bleu France */
-}
-
-.white {
-  color: white;
-}
-
-.red {
-  color: #ef4135; /* rouge France */
-}
-
-.title {
-  text-align: center;
-  font-size: 80px;
-  font-weight: bold;
-}
-
-.view {
-  display: none;
-}
-
-.load-more {
-  display: block;
-  margin: 30px auto;
-  padding: 15px 25px;
-  font-size: 18px;
-  border-radius: 10px;
-  background: #2684c3;
-  color: white;
-  cursor: pointer;
-}
-
+/* Bouton charger plus */
 .load-more {
   background: transparent;
   border: none;
@@ -317,4 +219,120 @@ h2 {
 .load-more:hover {
   color: #2f6fe0;
   transform: translateY(2px);
+}
+
+/* pour adapter au mobile */
+@media (max-width: 600px) {
+  body {
+    margin: 10px;
+    font-size: 14px;
+  }
+  .search input {
+    width: 100%;
+  }
+}
+/*style général des cartes(noir, arrondi, ombre, animation d’apparition)*/
+.card {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  break-inside: avoid;
+  background: black;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+
+  animation: fadeIn 2s ease forwards;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+  will-change: transform;
+  transform: none;
+}
+/*effet au survol des cartes*/
+.card:hover {
+  transform: translateY(-3px) scale(1.02);
+  transform: scale(1.05) !important;
+}
+
+/*pour rendre la barre de recherche un peux plus belle*/
+.search {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: #2d6cdf;
+}
+
+#searchBtn {
+  padding: 8px 12px;
+  border: none;
+  background: #2d6cdf;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#searchBtn:hover {
+  background: #1f4fb8;
+}
+
+.category {
+  padding: 8px 12px;
+  margin: 5px;
+  background: black;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category:hover {
+  background: #eee;
+}
+
+.list {
+  padding: 10px;
+}
+/*empeche le scroll horizontal surtout pour téléphone*/
+html,
+body {
+  overflow-x: hidden;
+}
+/*évite que les éléments dépassent pour mobile*/
+input,
+button {
+  max-width: 100%;
+}
+/*quand une carte arrive doucemnt*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#welcome {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  min-height: 50vh;
+  flex-wrap: wrap;
 }
