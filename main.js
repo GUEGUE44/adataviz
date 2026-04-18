@@ -24,7 +24,6 @@ const mainContent = document.querySelector("#mainContent");
 const loadMoreBtn = document.querySelector("#loadMoreBtn");
 const categories = document.querySelector("#categories");
 //configure les boutons au départ:bouton retour = caché et bouton charger plus = caché
-
 returnBtn.textContent = "Retour";
 returnBtn.style.display = "none";
 loadMoreBtn.style.display = "none";

@@ -17,9 +17,6 @@ couleur du texte = gris clair*/
 }
 
 /*ajoute de l'espace autour de toute la page*/
-body {
-  margin: 20px;
-}
 
 /*couleur du bouton retour*/
 #returnBtn {
@@ -35,6 +32,7 @@ body {
   text-align: center;
   font-size: 80px;
   font-weight: bold;
+  margin-top: 15px;
 }
 /*mes des couleurs dans le titre Paris*/
 .blue {
@@ -53,8 +51,9 @@ body {
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  height: 50vh;
+  margin-top: 20px;
+  min-height: calc(100vh - 100px);
+  flex-wrap: wrap;
 }
 
 /*carte de l'acceuil cliquables, vidéos, arrondies, effet hover et effet responsive du placement des cartes*/
@@ -335,4 +334,29 @@ button {
   margin-top: 50px;
   min-height: 50vh;
   flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .welcome-card {
+    overflow: hidden;
+  }
+
+  .card-video {
+    pointer-events: none; /* 🔥 clé du fix */
+  }
+
+  .welcome-card::after {
+    background: rgba(0, 0, 0, 0.4); /* garde lisibilité */
+  }
+}
+
+.directive {
+  color: gold;
+  text-align: center;
+  margin-top: -20px;
+}
+
+/* caché dès que l’accueil disparaît */
+#mainContent .directive {
+  display: none;
 }
