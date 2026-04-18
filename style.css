@@ -341,8 +341,27 @@ button {
     overflow: hidden;
   }
 
+  .welcome-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
   .card-video {
-    pointer-events: none; /* 🔥 clé du fix */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    z-index: 0;
+    pointer-events: none; /* OK mais pas suffisant seul */
+  }
+
+  .card-content,
+  .card-content1 {
+    position: relative;
+    z-index: 2;
   }
 
   .welcome-card::after {
@@ -362,4 +381,14 @@ button {
 /* caché dès que l’accueil disparaît */
 #mainContent .directive {
   display: none;
+}
+
+.card a {
+  color: #4aa3ff;
+  text-decoration: none;
+}
+
+.card a:hover {
+  color: #7cc0ff;
+  text-decoration: underline;
 }
