@@ -39,7 +39,7 @@ couleur du texte = gris clair*/
   color: #0055a4;
 }
 .white {
-  color: white;
+  color: inherit;
 }
 .red {
   color: #ef4135;
