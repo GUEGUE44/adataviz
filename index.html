@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les arbres de Paris</title>
+  </head>
+  <body>
+    <h1 class="title">
+      <span class="blue">Pa</span><span class="white">r</span
+      ><span class="red">is</span>
+    </h1>
+    <div id="welcome">
+      <div id="arbresCard" class="welcome-card">
+        <video class="card-video" muted loop>
+          <source src="arbres.mp4" type="video/mp4" />
+        </video>
+
+        <div class="card-content1">
+          <h2><p>Les arbres à Paris</p></h2>
+        </div>
+      </div>
+      <div id="parisCard" class="welcome-card">
+        <video class="card-video" muted loop>
+          <source src="paris.mp4" type="video/mp4" />
+        </video>
+
+        <div class="card-content">
+          <h2><p>Que faire à Paris</p></h2>
+        </div>
+      </div>
+    </div>
+    <div id="mainContent">
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Rechercher un arbre" />
+        <button id="searchBtn">Rechercher</button>
+        <button id="returnBtn">Retour</button>
+        <button id="accueilBtn">Accueil</button>
+      </div>
+      <div id="arbresView" class="view">
+        <div class="list-arbres"></div>
+      </div>
+
+      <div id="parisView" class="view">
+        <div id="categories">
+          <div class="category" data-type="balade">🚶 Balades</div>
+          <div class="category" data-type="exposition">🖼️ Musées</div>
+          <div class="category" data-type="spectacle">🎭 Spectacles</div>
+          <div class="category" data-type="concert">🎵 Concerts</div>
+        </div>
+
+        <div class="list"></div>
+        <button id="loadMoreBtn" class="load-more">▼ chargé plus</button>
+      </div>
+    </div>
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
